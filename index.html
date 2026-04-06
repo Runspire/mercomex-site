@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mercomex — Global Trading & Import Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0d1f3c;
+      --blue: #1a4480;
+      --gold: #c8972a;
+      --gold-light: #e8b84b;
+      --white: #ffffff;
+      --gray-light: #f4f6fa;
+      --gray: #8892a4;
+      --text: #1e2a3a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── LANGUAGE TOGGLE ── */
+    #lang-bar {
+      background: var(--navy);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 8px 48px;
+      gap: 6px;
+    }
+    #lang-bar span { color: var(--gray); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: var(--white);
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+    .lang-btn.active { background: var(--gold); border-color: var(--gold); color: var(--navy); font-weight: 700; }
+    .lang-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--gold);
+    }
+    .logo-mark svg { width: 26px; height: 26px; }
+    .logo-text { display: flex; flex-direction: column; line-height: 1; }
+    .logo-name { font-weight: 800; font-size: 20px; color: var(--navy); letter-spacing: 2px; }
+    .logo-tag { font-size: 9px; color: var(--gold); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--blue); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 700 !important;
+      font-size: 13px !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e5ba8 100%);
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 48px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: 5%;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(200,151,42,0.08);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,151,42,0.15);
+      border: 1px solid rgba(200,151,42,0.4);
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero-badge span { color: var(--gold-light); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: clamp(36px, 4vw, 56px);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    h1 .accent { color: var(--gold-light); }
+    .hero-sub {
+      color: rgba(255,255,255,0.72);
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(200,151,42,0.35);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.07); }
+
+    .hero-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .stat-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    .stat-card .num {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-card .num span { color: var(--gold-light); }
+    .stat-card .label {
+      color: rgba(255,255,255,0.6);
+      font-size: 12px;
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+    .radar-card {
+      background: rgba(200,151,42,0.1);
+      border: 1px solid rgba(200,151,42,0.3);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .radar-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gold);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .radar-icon svg { width: 24px; height: 24px; fill: var(--navy); }
+    .radar-card .info .title { color: var(--white); font-weight: 700; font-size: 14px; }
+    .radar-card .info .desc { color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 4px; }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--gray-light);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gray);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .trust-item svg { width: 18px; height: 18px; color: var(--blue); }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 48px; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .section-intro {
+      color: var(--gray);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .section-header { margin-bottom: 60px; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .about-image {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 20px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image::before {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 200px; height: 200px;
+      background: rgba(200,151,42,0.1);
+      border-radius: 50%;
+      transform: translate(30%, 30%);
+    }
+    .map-svg { width: 100%; opacity: 0.85; }
+    .route-label {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 8px 14px;
+      border-radius: 8px;
+    }
+    .route-label span { color: var(--white); font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+    .about-points { display: flex; flex-direction: column; gap: 24px; margin-top: 32px; }
+    .about-point { display: flex; gap: 16px; align-items: flex-start; }
+    .point-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gray-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .point-icon svg { width: 20px; height: 20px; color: var(--blue); }
+    .point-text h4 { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+    .point-text p { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+    /* ── PRODUCTS ── */
+    #products { background: var(--gray-light); }
+    .products-inner { max-width: 1200px; margin: 0 auto; }
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .product-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px 28px;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--blue);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .product-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); border-color: rgba(26,68,128,0.1); transform: translateY(-4px); }
+    .product-card:hover::before { opacity: 1; }
+    .product-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--gray-light);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .product-icon svg { width: 32px; height: 32px; color: var(--blue); }
+    .product-card h3 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .product-card p { font-size: 14px; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
+    .product-examples { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      background: var(--gray-light);
+      color: var(--blue);
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── WHY US ── */
+    #why { background: var(--white); }
+    .why-inner { max-width: 1200px; margin: 0 auto; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .why-card {
+      padding: 32px;
+      border-radius: 16px;
+      border: 1px solid #e8ecf2;
+      transition: all 0.3s;
+    }
+    .why-card:hover { border-color: var(--blue); box-shadow: 0 8px 32px rgba(26,68,128,0.08); }
+    .why-number {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--gray-light);
+      line-height: 1;
+      margin-bottom: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+    .why-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .why-card p { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--navy); }
+    .contact-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #contact .section-label { color: var(--gold); }
+    #contact h2 { color: var(--white); }
+    #contact .section-intro { color: rgba(255,255,255,0.65); margin: 0 auto 48px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; text-align: left; margin-bottom: 48px; }
+    .contact-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(200,151,42,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 20px; height: 20px; color: var(--gold); }
+    .contact-card .info .label { color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+    .contact-card .info .value { color: var(--white); font-weight: 600; font-size: 15px; margin-top: 4px; }
+
+    .wechat-note {
+      background: rgba(200,151,42,0.1);
+      border: 1px solid rgba(200,151,42,0.25);
+      border-radius: 10px;
+      padding: 16px 24px;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+    .wechat-note svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #07121e;
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer .copy { color: rgba(255,255,255,0.35); font-size: 13px; }
+    footer .copy span { color: var(--gold); }
+    .footer-radar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(200,151,42,0.1);
+      border: 1px solid rgba(200,151,42,0.2);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+    .footer-radar span { color: var(--gold-light); font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+    .radar-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      nav ul { display: none; }
+      .hero { padding: 60px 24px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      section { padding: 60px 24px; }
+      .stat-cards { grid-template-columns: 1fr 1fr; }
+      #lang-bar { padding: 8px 24px; }
+      footer { padding: 24px; flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── LANGUAGE SWITCHING ── */
+    [data-lang] { display: none; }
+    .lang-en [data-lang="en"] { display: block; }
+    .lang-pt [data-lang="pt"] { display: block; }
+    .lang-en [data-lang="en"].inline { display: inline; }
+    .lang-pt [data-lang="pt"].inline { display: inline; }
+    body.lang-en [data-lang="en"],
+    body.lang-pt [data-lang="pt"] { display: revert; }
+
+    /* show the right language */
+    .en-only, .pt-only { display: none; }
+    body.lang-en .en-only { display: revert; }
+    body.lang-pt .pt-only { display: revert; }
+  </style>
+</head>
+<body class="lang-en">
+
+<!-- LANG BAR -->
+<div id="lang-bar">
+  <span>Language / Idioma</span>
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('pt')">PT</button>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">
+      <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 20L8 8L13 15L18 8L23 20" stroke="#C8972A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="13" cy="7" r="2.5" fill="#C8972A"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">MERCOMEX</span>
+      <span class="logo-tag">Trading & Import</span>
+    </div>
+  </a>
+  <ul>
+    <li><a href="#about" class="en-only">About</a><a href="#about" class="pt-only">Sobre</a></li>
+    <li><a href="#products" class="en-only">Products</a><a href="#products" class="pt-only">Produtos</a></li>
+    <li><a href="#why" class="en-only">Why Us</a><a href="#why" class="pt-only">Diferenciais</a></li>
+    <li><a href="#contact" class="nav-cta en-only">Contact</a><a href="#contact" class="nav-cta pt-only">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="dot"></div>
+        <span class="en-only">Brazil ↔ China Trade Partner</span>
+        <span class="pt-only">Parceiro Comercial Brasil ↔ China</span>
+      </div>
+      <h1 class="en-only">Your <span class="accent">Reliable</span> Import Partner from Brazil</h1>
+      <h1 class="pt-only">Seu <span class="accent">Parceiro Confiável</span> de Importação do Brasil</h1>
+      <p class="hero-sub en-only">Mercomex connects Brazilian businesses with premium Chinese manufacturers — medical equipment, fitness gear, industrial products, and more. End-to-end import solutions with full customs compliance.</p>
+      <p class="hero-sub pt-only">A Mercomex conecta empresas brasileiras com fabricantes chineses de qualidade — equipamentos médicos, fitness, industriais e muito mais. Soluções completas de importação com total compliance aduaneiro.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary en-only">Get in Touch</a>
+        <a href="#contact" class="btn-primary pt-only">Fale Conosco</a>
+        <a href="#products" class="btn-outline en-only">Our Products</a>
+        <a href="#products" class="btn-outline pt-only">Nossos Produtos</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="num">10<span>+</span></div>
+          <div class="label en-only">Product Categories</div>
+          <div class="label pt-only">Categorias de Produtos</div>
+        </div>
+        <div class="stat-card">
+          <div class="num"><span>∞</span></div>
+          <div class="label en-only">RADAR License — Unlimited Import Value</div>
+          <div class="label pt-only">Licença RADAR — Valor Ilimitado</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">BR<span>↔</span>CN</div>
+          <div class="label en-only">Brazil ↔ China Direct Operations</div>
+          <div class="label pt-only">Operações Diretas Brasil ↔ China</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">B2<span>B</span></div>
+          <div class="label en-only">Business to Business Focus</div>
+          <div class="label pt-only">Foco em Empresas</div>
+        </div>
+      </div>
+      <div class="radar-card">
+        <div class="radar-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="#0d1f3c" stroke-width="2"/>
+            <path d="M12 3v9l5 3" stroke="#0d1f3c" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="12" r="2" fill="#0d1f3c"/>
+          </svg>
+        </div>
+        <div class="info">
+          <div class="title en-only">Unlimited RADAR License — Receita Federal</div>
+          <div class="title pt-only">Licença RADAR Ilimitada — Receita Federal</div>
+          <div class="desc en-only">Authorized for unrestricted import operations from China to Brazil</div>
+          <div class="desc pt-only">Autorizada para operações de importação sem restrição de valor</div>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+    <span class="en-only">Customs Compliant</span>
+    <span class="pt-only">Compliance Aduaneiro</span>
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+    <span class="en-only">Direct from China</span>
+    <span class="pt-only">Direto da China</span>
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+    <span class="en-only">CNPJ Registered</span>
+    <span class="pt-only">CNPJ Regularizado</span>
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"/></svg>
+    <span class="en-only">End-to-End Operations</span>
+    <span class="pt-only">Operações de Ponta a Ponta</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-image">
+      <!-- Stylized world map / route visual -->
+      <svg class="map-svg" viewBox="0 0 400 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Simplified continents -->
+        <ellipse cx="80" cy="130" rx="50" ry="65" fill="rgba(255,255,255,0.06)" />
+        <ellipse cx="90" cy="80" rx="30" ry="25" fill="rgba(255,255,255,0.06)" />
+        <ellipse cx="200" cy="90" rx="45" ry="50" fill="rgba(255,255,255,0.06)" />
+        <ellipse cx="190" cy="155" rx="20" ry="15" fill="rgba(255,255,255,0.06)" />
+        <ellipse cx="320" cy="80" rx="55" ry="45" fill="rgba(255,255,255,0.06)" />
+        <ellipse cx="350" cy="145" rx="25" ry="20" fill="rgba(255,255,255,0.06)" />
+        <!-- Route line: Brazil to China -->
+        <path d="M 95 155 Q 200 20 340 75" stroke="#C8972A" stroke-width="2" stroke-dasharray="6 4" opacity="0.7"/>
+        <!-- Brazil marker -->
+        <circle cx="95" cy="155" r="7" fill="#C8972A"/>
+        <circle cx="95" cy="155" r="14" fill="rgba(200,151,42,0.2)"/>
+        <text x="95" y="182" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10" font-family="Inter" font-weight="600">BRASIL</text>
+        <!-- China marker -->
+        <circle cx="340" cy="75" r="7" fill="#C8972A"/>
+        <circle cx="340" cy="75" r="14" fill="rgba(200,151,42,0.2)"/>
+        <text x="340" y="52" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="10" font-family="Inter" font-weight="600">CHINA</text>
+        <!-- Arrow near China -->
+        <path d="M 332 76 L 340 68 L 348 76" stroke="#C8972A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      </svg>
+      <div class="route-label">
+        <span>🇧🇷 São Paulo ↔ Shanghai 🇨🇳</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label en-only">About Mercomex</div>
+      <div class="section-label pt-only">Sobre a Mercomex</div>
+      <h2 class="en-only">Brazil's bridge to China's best manufacturers</h2>
+      <h2 class="pt-only">A ponte do Brasil com os melhores fabricantes da China</h2>
+      <p class="section-intro en-only">Mercomex is a Brazilian trading company specialized in direct import from China. We hold an <strong>unlimited RADAR license</strong> issued by Receita Federal, enabling us to operate import transactions of any scale — from single containers to full commercial partnerships.</p>
+      <p class="section-intro pt-only">A Mercomex é uma trading company brasileira especializada em importação direta da China. Possuímos <strong>licença RADAR ilimitada</strong> emitida pela Receita Federal, o que nos permite operar importações de qualquer escala — de containers individuais a parcerias comerciais completas.</p>
+      <div class="about-points">
+        <div class="about-point">
+          <div class="point-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div class="point-text">
+            <h4 class="en-only">Full Customs Compliance</h4>
+            <h4 class="pt-only">Compliance Aduaneiro Completo</h4>
+            <p class="en-only">End-to-end management of all import processes — documentation, customs clearance, logistics, and delivery.</p>
+            <p class="pt-only">Gestão completa de todos os processos de importação — documentação, desembaraço aduaneiro, logística e entrega.</p>
+          </div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="point-text">
+            <h4 class="en-only">Direct Manufacturer Access</h4>
+            <h4 class="pt-only">Acesso Direto aos Fabricantes</h4>
+            <p class="en-only">We travel directly to China to visit factories, negotiate prices, and ensure product quality before shipping.</p>
+            <p class="pt-only">Viajamos diretamente à China para visitar fábricas, negociar preços e garantir a qualidade antes do embarque.</p>
+          </div>
+        </div>
+        <div class="about-point">
+          <div class="point-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div class="point-text">
+            <h4 class="en-only">Fast, Reliable Operations</h4>
+            <h4 class="pt-only">Operações Ágeis e Confiáveis</h4>
+            <p class="en-only">Established supply chain processes tested in real commercial operations — no learning curve, just results.</p>
+            <p class="pt-only">Processos de cadeia de suprimentos testados em operações comerciais reais — sem curva de aprendizado, apenas resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-inner">
+    <div class="section-header" style="max-width:1200px; margin: 0 auto 60px;">
+      <div class="section-label en-only">What We Import</div>
+      <div class="section-label pt-only">O Que Importamos</div>
+      <h2 class="en-only">Multi-sector product portfolio</h2>
+      <h2 class="pt-only">Portfólio multi-setor de produtos</h2>
+      <p class="section-intro en-only">We source and import a diverse range of high-quality products directly from Chinese manufacturers across multiple sectors.</p>
+      <p class="section-intro pt-only">Buscamos e importamos uma ampla gama de produtos de alta qualidade diretamente de fabricantes chineses em múltiplos setores.</p>
+    </div>
+    <div class="products-grid" style="max-width:1200px; margin: 0 auto;">
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h3 class="en-only">Medical Equipment</h3>
+        <h3 class="pt-only">Equipamentos Médicos</h3>
+        <p class="en-only">Professional medical and diagnostic devices sourced from certified Chinese manufacturers, ready for the Brazilian healthcare market.</p>
+        <p class="pt-only">Dispositivos médicos e de diagnóstico profissional, fabricados por fornecedores certificados chineses para o mercado de saúde brasileiro.</p>
+        <div class="product-examples">
+          <span class="tag en-only">Diagnostic devices</span>
+          <span class="tag pt-only">Diagnóstico</span>
+          <span class="tag en-only">Rehabilitation</span>
+          <span class="tag pt-only">Reabilitação</span>
+          <span class="tag en-only">Hospital supplies</span>
+          <span class="tag pt-only">Insumos hospitalares</span>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 class="en-only">Fitness & Gym Equipment</h3>
+        <h3 class="pt-only">Equipamentos de Academia</h3>
+        <p class="en-only">Commercial and home fitness equipment — our established product line with proven import operations and logistics already in place.</p>
+        <p class="pt-only">Equipamentos de fitness comercial e residencial — nossa linha estabelecida com operações de importação e logística já consolidadas.</p>
+        <div class="product-examples">
+          <span class="tag en-only">Weight training</span>
+          <span class="tag pt-only">Musculação</span>
+          <span class="tag en-only">Cardio machines</span>
+          <span class="tag pt-only">Cardio</span>
+          <span class="tag en-only">Accessories</span>
+          <span class="tag pt-only">Acessórios</span>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+        </div>
+        <h3 class="en-only">Electronics & Technology</h3>
+        <h3 class="pt-only">Eletrônicos & Tecnologia</h3>
+        <p class="en-only">Consumer and professional electronics from China's leading tech manufacturers, curated for the Brazilian market requirements.</p>
+        <p class="pt-only">Eletrônicos de consumo e profissionais dos principais fabricantes de tecnologia da China, selecionados para o mercado brasileiro.</p>
+        <div class="product-examples">
+          <span class="tag en-only">Consumer electronics</span>
+          <span class="tag pt-only">Eletrônicos</span>
+          <span class="tag en-only">Smart devices</span>
+          <span class="tag pt-only">Dispositivos smart</span>
+          <span class="tag en-only">Accessories</span>
+          <span class="tag pt-only">Acessórios</span>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+        </div>
+        <h3 class="en-only">Industrial & Safety</h3>
+        <h3 class="pt-only">Industrial & Segurança</h3>
+        <p class="en-only">Industrial tools, safety equipment, and PPE — reliable supply for Brazilian industries at competitive import prices.</p>
+        <p class="pt-only">Ferramentas industriais, equipamentos de segurança e EPIs — fornecimento confiável para indústrias brasileiras a preços competitivos.</p>
+        <div class="product-examples">
+          <span class="tag en-only">PPE</span>
+          <span class="tag pt-only">EPI</span>
+          <span class="tag en-only">Industrial tools</span>
+          <span class="tag pt-only">Ferramentas</span>
+          <span class="tag en-only">Safety gear</span>
+          <span class="tag pt-only">Segurança</span>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </div>
+        <h3 class="en-only">Home & Lifestyle</h3>
+        <h3 class="pt-only">Casa & Lifestyle</h3>
+        <p class="en-only">Home goods, furniture components, and lifestyle products — expanding categories to meet growing Brazilian consumer demand.</p>
+        <p class="pt-only">Produtos para casa, componentes de móveis e produtos de lifestyle — categorias em expansão para atender a crescente demanda do consumidor brasileiro.</p>
+        <div class="product-examples">
+          <span class="tag en-only">Home goods</span>
+          <span class="tag pt-only">Casa</span>
+          <span class="tag en-only">Furniture</span>
+          <span class="tag pt-only">Mobiliário</span>
+          <span class="tag en-only">Décor</span>
+          <span class="tag pt-only">Decoração</span>
+        </div>
+      </div>
+
+      <div class="product-card" style="background: var(--navy); border-color: var(--navy);">
+        <div class="product-icon" style="background: rgba(200,151,42,0.15);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#C8972A" stroke-width="2"><path d="M12 4v16m8-8H4"/></svg>
+        </div>
+        <h3 style="color: white;" class="en-only">Your product category</h3>
+        <h3 style="color: white;" class="pt-only">Sua categoria de produto</h3>
+        <p style="color: rgba(255,255,255,0.6);" class="en-only">Looking for a specific product from China? We can source virtually any category. Get in touch and let's discuss your needs.</p>
+        <p style="color: rgba(255,255,255,0.6);" class="pt-only">Procura um produto específico da China? Podemos encontrar praticamente qualquer categoria. Entre em contato e vamos conversar sobre sua necessidade.</p>
+        <div style="margin-top: 20px;">
+          <a href="#contact" class="btn-primary" style="padding: 12px 24px; font-size: 13px;">
+            <span class="en-only">Contact Us</span>
+            <span class="pt-only">Fale Conosco</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-inner">
+    <div class="section-header" style="max-width: 1200px; margin: 0 auto 60px;">
+      <div class="section-label en-only">Why Mercomex</div>
+      <div class="section-label pt-only">Por que a Mercomex</div>
+      <h2 class="en-only">Built for serious import operations</h2>
+      <h2 class="pt-only">Feita para operações de importação sérias</h2>
+      <p class="section-intro en-only">We don't just find products — we build long-term supply chains that work reliably, legally, and cost-effectively.</p>
+      <p class="section-intro pt-only">Não apenas encontramos produtos — construímos cadeias de suprimentos duradouras que funcionam de forma confiável, legal e com custo eficiente.</p>
+    </div>
+    <div class="why-grid" style="max-width: 1200px; margin: 0 auto;">
+      <div class="why-card">
+        <div class="why-number">01</div>
+        <h3 class="en-only">Unlimited RADAR License</h3>
+        <h3 class="pt-only">Licença RADAR Ilimitada</h3>
+        <p class="en-only">Our Receita Federal RADAR license has no value cap — meaning we can import shipments of any size, from any amount. No restrictions, no workarounds needed.</p>
+        <p class="pt-only">Nossa licença RADAR da Receita Federal não tem limite de valor — o que significa que podemos importar cargas de qualquer tamanho. Sem restrições.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">02</div>
+        <h3 class="en-only">Factory-Direct Sourcing</h3>
+        <h3 class="pt-only">Sourcing Direto na Fábrica</h3>
+        <p class="en-only">We visit manufacturers directly in China — in cities like Guangzhou, Shenzhen, and Yiwu — eliminating intermediaries and securing the best factory prices.</p>
+        <p class="pt-only">Visitamos fabricantes diretamente na China — em cidades como Guangzhou, Shenzhen e Yiwu — eliminando intermediários e garantindo os melhores preços de fábrica.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">03</div>
+        <h3 class="en-only">Proven Customs Process</h3>
+        <h3 class="pt-only">Processo Aduaneiro Testado</h3>
+        <p class="en-only">Our team has successfully operated real commercial import cycles — from purchase order to delivery in Brazil — with all documentation handled professionally.</p>
+        <p class="pt-only">Nossa equipe já operou ciclos reais de importação — desde a ordem de compra até a entrega no Brasil — com toda documentação gerenciada profissionalmente.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">04</div>
+        <h3 class="en-only">Quality Assurance</h3>
+        <h3 class="pt-only">Garantia de Qualidade</h3>
+        <p class="en-only">Physical inspection at the factory level before any shipment is authorized. We don't ship what we haven't seen and approved ourselves.</p>
+        <p class="pt-only">Inspeção física em nível de fábrica antes de qualquer embarque ser autorizado. Não embarcamos o que não vimos e aprovamos pessoalmente.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">05</div>
+        <h3 class="en-only">Multi-Sector Flexibility</h3>
+        <h3 class="pt-only">Flexibilidade Multi-Setor</h3>
+        <p class="en-only">From medical devices to fitness equipment to general merchandise — our experience spans categories, giving you one reliable partner for diverse sourcing needs.</p>
+        <p class="pt-only">De dispositivos médicos a equipamentos de academia — nossa experiência abrange categorias diversas, dando a você um parceiro confiável para múltiplas necessidades.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-number">06</div>
+        <h3 class="en-only">Brazil-Based Operations</h3>
+        <h3 class="pt-only">Operações Sediadas no Brasil</h3>
+        <p class="en-only">Fully registered Brazilian company (CNPJ) with local accountability. You deal with a Brazilian team that understands your market and regulatory environment.</p>
+        <p class="pt-only">Empresa brasileira totalmente regularizada (CNPJ) com responsabilidade local. Você trata com uma equipe brasileira que entende seu mercado e ambiente regulatório.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label en-only">Get in Touch</div>
+    <div class="section-label pt-only">Entre em Contato</div>
+    <h2 class="en-only">Ready to source from China?</h2>
+    <h2 class="pt-only">Pronto para importar da China?</h2>
+    <p class="section-intro en-only">Tell us what you need and our team will respond quickly with sourcing options, pricing estimates, and next steps.</p>
+    <p class="section-intro pt-only">Nos diga o que você precisa e nossa equipe responderá rapidamente com opções de sourcing, estimativas de preços e próximos passos.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="info">
+          <div class="label en-only">Email</div>
+          <div class="label pt-only">Email</div>
+          <div class="value">contato@mercomex.com.br</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        </div>
+        <div class="info">
+          <div class="label">WhatsApp</div>
+          <div class="value">+55 (11) 9 XXXX-XXXX</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div class="info">
+          <div class="label en-only">Location</div>
+          <div class="label pt-only">Localização</div>
+          <div class="value">São Paulo, Brasil</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+        </div>
+        <div class="info">
+          <div class="label">CNPJ</div>
+          <div class="value en-only">Registered — Available on request</div>
+          <div class="value pt-only">Regularizado — Disponível mediante solicitação</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wechat-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+      <span class="en-only">Also available on <strong>WeChat</strong> and <strong>WhatsApp</strong> for international suppliers and partners.</span>
+      <span class="pt-only">Também disponíveis no <strong>WeChat</strong> e <strong>WhatsApp</strong> para fornecedores e parceiros internacionais.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="copy">© 2024 <span>Mercomex</span> — Trading & Import Solutions. <span class="en-only">All rights reserved.</span><span class="pt-only">Todos os direitos reservados.</span></div>
+  <div class="footer-radar">
+    <div class="radar-dot"></div>
+    <span>RADAR License — Unlimited</span>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.lang-btn[onclick="setLang(\'' + lang + '\')"]').classList.add('active');
+    document.documentElement.lang = lang;
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 20) {
+      nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.12)';
+    } else {
+      nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+    }
+  });
+</script>
+</body>
+</html>
